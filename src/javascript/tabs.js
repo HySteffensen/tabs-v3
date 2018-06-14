@@ -1,8 +1,11 @@
 (function() {
     "use strict";
     
-    exports.initialize = function(element) {
-        element.classList.add("selected");
+    exports.initialize = function(defaultTab, tabList) {
+        tabList.forEach(function(tab) {
+            tab.classList.remove("selected");
+        });
+        defaultTab.classList.add("selected");
     };
 
 }());

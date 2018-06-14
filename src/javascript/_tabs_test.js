@@ -16,17 +16,20 @@
 			removeElement(container);
 		});
 
-		it("adds 'selected' class to an element", function() {
-			var element = addElement("div");
-			tabs.initialize(element);
-			assert.equal(element.getAttribute("class"), "selected");
-		});
+		it("it deselects multiple tabs and selects default tab to a previously existing class", function() {
+			var tab1 = addElement("div");
+			var defaultTab = addElement("div");
+			var tab3 = addElement("div");
 
-		it("adds 'selected' to a previously existing class", function() {
-			var element = addElement("div");
-			element.setAttribute("class", "previouslyExistingClass");
-			tabs.initialize(element);
-			assert.equal(element.getAttribute("class"), "previouslyExistingClass selected");
+			tab1.setAttribute("class", "previouslyExistingClass");
+			defaultTab.setAttribute("class", "previouslyExistingClass");
+			tab3.setAttribute("class", "previouslyExistingClass");
+
+			tabs.initialize(defaultTab, [ tab1, defaultTab, tab3 ]);
+
+			assert.equal(tab1.getAttribute("class"), "previouslyExistingClass", "tab 1 should not be selected");
+			assert.equal(defaultTab.getAttribute("class"), "previouslyExistingClass selected", "default tab should be selected");
+			assert.equal(tab3.getAttribute("class"), "previouslyExistingClass", "tab3 should not be selected");
 		});	
 
 		function addElement(tagName) {
