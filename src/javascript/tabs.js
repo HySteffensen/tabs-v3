@@ -1,11 +1,13 @@
 (function() {
     "use strict";
+
+    var $ = require("./jquery");
     
-    exports.initialize = function(defaultTab, tabList) {
-        tabList.forEach(function(tab) {
-            tab.classList.remove("selected");
+    exports.initialize = function(defaultTab, queryList) {
+        $(queryList).each(function(){
+            $(this).removeClass("selected");
         });
-        defaultTab.classList.add("selected");
+        $(defaultTab).addClass("selected");
     };
 
 }());

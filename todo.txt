@@ -1,8 +1,4 @@
 initialize to display default tab
-remove activeTab class
-add activeTab class
+
 add displayContent class
 remove displayContent class
-
-Engineering tasks:
-get index of tabs
