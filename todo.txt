@@ -1,4 +1,8 @@
 initialize to display default tab
 
-add displayContent class
-remove displayContent class
+refactor code to use vanilla javascript for:
+    * tab seletion
+    * showing contents
+
+ability to switch tab/contents to tab that is not default
+click event handler
