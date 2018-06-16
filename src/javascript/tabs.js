@@ -3,23 +3,25 @@
 
     var $ = require("./jquery");
     
-    exports.initialize = function(defaultTab, tabsQueryList, contentQueryList ) {
-        var index;
-
-        // selects default tab 
-        // TODO factor out to its own function
+    exports.initialize = function(defaultTab, tabsQueryList, contentQueryList) {
+        var index = $(defaultTab).index();
+        
+        selectTab(defaultTab, tabsQueryList);
+        showContent(index, contentQueryList);
+    };
+    
+    function selectTab(defaultTab, tabsQueryList) {
         $(tabsQueryList).each(function(){
             $(this).removeClass("selected");
         });
-        index = $(defaultTab).index();
         $(defaultTab).addClass("selected");
-
-        // shows default content 
-        // TODO factor out to its own function
+    }
+    
+    function showContent(index, contentQueryList) {
         $(contentQueryList).each(function() {
             $(this).removeClass("visible");
         });
         $(contentQueryList + ":nth-child(" + (index + 1) + ")").addClass('visible');
-    };
+    }
 
 }());
