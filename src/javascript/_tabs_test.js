@@ -18,24 +18,19 @@
 		});
 
 		it("it deselects multiple tabs and selects default tab to a previously existing class", function() {
-			var superContainer = addElement("div");
-			superContainer.setAttribute("class", "super_container");
-			var tabsContainer = addElement("div");
-			tabsContainer.setAttribute("class", "tabs_container");
-			var panelsContainer = addElement("div");
-			panelsContainer.setAttribute("class", "panels_container");
-			var panels = addElement("div");
-			panels.setAttribute("class", "panels");
-			var panel = addElement("div");
-			panel.setAttribute("class", "panel");
+			var superContainer = createContainer("super_container");
+			var tabsContainer = createContainer("tabs_container");
+			var panelsContainer = createContainer("panels_container");
+			var panels = createContainer("panels");
+			var panel = createContainer("panels");
 			
-			var tab1 = addElement("span");
-			var defaultTab = addElement("span");
-			var tab3 = addElement("span");
+			var tab1 = createTab();
+			var defaultTab = createTab();
+			var tab3 = createTab();
 
-			var content1 = addElement("div");
-			var content2 = addElement("div");
-			var content3 = addElement("div");
+			var content1 = createTabContent();
+			var content2 = createTabContent();
+			var content3 = createTabContent();
 
 			superContainer.appendChild(tabsContainer);
 			tabsContainer.appendChild(tab1);
@@ -77,6 +72,27 @@
 
 		function removeElement(element) {
 			element.parentNode.removeChild(element);
+		}
+
+		function createTab() {
+			var tab = addElement("span");
+			tab.innerHTML = "tab";
+
+			return tab;
+		}
+
+		function createTabContent() {
+			var content = addElement("div");
+			content.innerHTML = "content";
+
+			return content;
+		}
+
+		function createContainer(className) {
+			var container = addElement("div");
+			container.setAttribute("class", className);
+
+			return container;
 		}
 		
 	});
