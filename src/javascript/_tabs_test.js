@@ -18,29 +18,36 @@
 		});
 
 		it("it deselects multiple tabs and selects default tab to a previously existing class", function() {
+			
+			// container setup
 			var superContainer = createContainer("super_container");
 			var tabsContainer = createContainer("tabs_container");
 			var panelsContainer = createContainer("panels_container");
 			var panels = createContainer("panels");
 			var panel = createContainer("panels");
 			
+			// tab creation
 			var tab1 = createTab();
 			var defaultTab = createTab();
 			var tab3 = createTab();
 
+			// content creation
 			var content1 = createTabContent();
 			var content2 = createTabContent();
 			var content3 = createTabContent();
 
+			// append tabsContainer to superContainer
 			superContainer.appendChild(tabsContainer);
 			tabsContainer.appendChild(tab1);
 			tabsContainer.appendChild(defaultTab);
 			tabsContainer.appendChild(tab3);
 
+			// append panelsContainer to superContainer
 			superContainer.appendChild(panelsContainer);
 			panelsContainer.appendChild(panels);
 			panels.appendChild(panel);
 
+			// append content to panel
 			panel.appendChild(content1);
 			panel.appendChild(content2);
 			panel.appendChild(content3);
