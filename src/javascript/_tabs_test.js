@@ -18,7 +18,52 @@
 		});
 
 		it("it deselects multiple tabs and selects default tab to a previously existing class", function() {
+			var elementClass = testSetup();
+
+			tabs.initialize(elementClass.defaultTab, "super_container tabs_container span", ".super_container .panels_container div");
+
+			assert.equal(elementClass.tab1.getAttribute("class"), "previouslyExistingClass", "tab 1 should not be selected");
+			assert.equal(elementClass.defaultTab.getAttribute("class"), "previouslyExistingClass selected", "default tab should be selected");
+			assert.equal(elementClass.tab3.getAttribute("class"), "previouslyExistingClass", "tab3 should not be selected");
+
+			assert.equal(elementClass.content1.getAttribute("class"), "previouslyExistingClass", "content 1 should not be visible");
+			assert.equal(elementClass.content2.getAttribute("class"), "previouslyExistingClass visible", "content 2 should be visible");
+			assert.equal(elementClass.content3.getAttribute("class"), "previouslyExistingClass", "content 3 should not be visible");
+		});	
+
+		function addElement(tagName) {
+			var element = document.createElement(tagName);
+			container.appendChild(element);
 			
+			return element;
+		}
+
+		function removeElement(element) {
+			element.parentNode.removeChild(element);
+		}
+
+		function createTab() {
+			var tab = addElement("span");
+			tab.innerHTML = "tab";
+
+			return tab;
+		}
+
+		function createTabContent() {
+			var content = addElement("div");
+			content.innerHTML = "content";
+
+			return content;
+		}
+
+		function createContainer(className) {
+			var container = addElement("div");
+			container.setAttribute("class", className);
+
+			return container;
+		}
+
+		function testSetup() {
 			// container setup
 			var superContainer = createContainer("super_container");
 			var tabsContainer = createContainer("tabs_container");
@@ -60,46 +105,16 @@
 			content2.setAttribute("class", "previouslyExistingClass");
 			content3.setAttribute("class", "previouslyExistingClass");
 
-			tabs.initialize(defaultTab, "super_container tabs_container span", ".super_container .panels_container div");
+			var elementClass = {};
+			elementClass.tab1 = tab1;
+			elementClass.defaultTab = defaultTab;
+			elementClass.tab3 = tab3;
 
-			assert.equal(tab1.getAttribute("class"), "previouslyExistingClass", "tab 1 should not be selected");
-			assert.equal(defaultTab.getAttribute("class"), "previouslyExistingClass selected", "default tab should be selected");
-			assert.equal(tab3.getAttribute("class"), "previouslyExistingClass", "tab3 should not be selected");
+			elementClass.content1 = content1;
+			elementClass.content2 = content2;
+			elementClass.content3 = content3;
 
-			assert.equal(content1.getAttribute("class"), "previouslyExistingClass", "content 1 should not be visible");
-			assert.equal(content2.getAttribute("class"), "previouslyExistingClass visible", "content 2 should be visible");
-			assert.equal(content3.getAttribute("class"), "previouslyExistingClass", "content 3 should not be visible");
-		});	
-
-		function addElement(tagName) {
-			var element = document.createElement(tagName);
-			container.appendChild(element);
-			return element;
-		}
-
-		function removeElement(element) {
-			element.parentNode.removeChild(element);
-		}
-
-		function createTab() {
-			var tab = addElement("span");
-			tab.innerHTML = "tab";
-
-			return tab;
-		}
-
-		function createTabContent() {
-			var content = addElement("div");
-			content.innerHTML = "content";
-
-			return content;
-		}
-
-		function createContainer(className) {
-			var container = addElement("div");
-			container.setAttribute("class", className);
-
-			return container;
+			return elementClass;
 		}
 		
 	});
